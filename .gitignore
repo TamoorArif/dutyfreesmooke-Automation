@@ -8,3 +8,8 @@ playwright/.cache/
 .DS_Store
 coverage/
 
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

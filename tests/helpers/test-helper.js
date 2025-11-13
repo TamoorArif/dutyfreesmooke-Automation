@@ -1,33 +1,12 @@
-/**
- * Helper functions for tests
- */
 
-class TestHelper {
-  constructor(page) {
-    this.page = page;
-  }
-
-  /**
-   * Wait for navigation to complete
-   */
-  async waitForNavigation() {
-    await this.page.waitForLoadState('networkidle');
-  }
-
-  /**
-   * Take a screenshot with a custom name
-   */
-  async takeScreenshot(name) {
-    await this.page.screenshot({ path: `test-results/${name}.png`, fullPage: true });
-  }
-
-  /**
-   * Wait for element to be visible
-   */
-  async waitForElementVisible(selector) {
-    await this.page.waitForSelector(selector, { state: 'visible' });
-  }
+function GenerateRandomEmail() {
+  const timestamp = Date.now();
+  // Using a random string prefix to ensure uniqueness across test runs and avoid potential caching issues
+  const randomString = Math.random().toString(36).substring(2, 7);
+  return `testuser_${randomString}_${timestamp}@testdomain.com`;
 }
 
-module.exports = { TestHelper };
-
+// CRITICAL: Must use module.exports for the require() call on line 3 of your test file to succeed.
+module.exports = {
+  GenerateRandomEmail
+};

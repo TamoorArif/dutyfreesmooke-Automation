@@ -1,7 +1,7 @@
 // tests/spec/wholeseller-signup.spec.js
 const { test, expect } = require('@playwright/test');
-const { WholesalerSignupPage } = require('../pages/wholeseller-singup');
-const { generateRandomEmail } = require('../helpers/randomemail-helper');
+const { generateRandomEmail } = require('../helpers/randomemail-helper')
+const WholesalerSignupPage = require('../pages/wholeseller-singup');
 
 test.describe('Wholesaler Signup Tests', () => {
   test('Positive: Wholesaler Signup - Pakistan', async ({ page }) => {
