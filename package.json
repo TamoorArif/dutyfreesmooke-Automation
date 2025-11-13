@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Playwright automation project for duty-free automation",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
@@ -19,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.56.1"
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1"
   }
 }
