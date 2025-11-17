@@ -1,6 +1,6 @@
 // tests/login.spec.js
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login-page';
+const { test, expect }= require( '@playwright/test');
+const { LoginPage }= require('../pages/login-page');
 
 test.describe('Login Tests', () => {
   test('should login with valid credentials', async ({ page }) => {
@@ -8,8 +8,8 @@ test.describe('Login Tests', () => {
     await loginPage.goto();
     await loginPage.login('test@yopmail.com', 'Test@123');
 
-    // const emailVerified = await loginPage.getEmailVerified();
-    // expect(emailVerified).toContain('Test@yopmail.com');
+    const emailVerified = await loginPage.getEmailVerified();
+    expect(emailVerified).toContain('Test@yopmail.com');
   });
 
   test('should show error with invalid credentials', async ({ page }) => {

@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "playwright test",
+    "test-file":"npx playwright test tests/spec/reset.spec.js --headed --project=chromium",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
