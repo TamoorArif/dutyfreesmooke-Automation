@@ -5,6 +5,7 @@ class Resetpassword {
     this.page = page;
 
     this.ageActionbtn = page.locator('.age-actions .btn.btn-over');
+<<<<<<< Updated upstream
     this.loginBtn = page.locator('.df-user-login-web');
     this.forgotLink = page.locator('#forgotpassword');
 
@@ -12,6 +13,13 @@ class Resetpassword {
     this.emailInput = null;
     this.continueBtn = null;
     this.successMsg = page.locator('text=Check your email');
+=======
+    this.loginbtn = page.locator('.df-user-login-web');
+    this.ressetpswlink = page.locator('#forgotpassword');
+    this.resetInput= page.locator('#forgotlogin');
+    this.submitbtn = page.locator('.resetbtn');
+    this.successMeessege=page.locator('.as-success-popup .modal-title')
+>>>>>>> Stashed changes
   }
 
   async goto() {
@@ -36,9 +44,20 @@ class Resetpassword {
     await this.emailInput.waitFor({ state: 'visible', timeout: 10000 });
   }
 
+<<<<<<< Updated upstream
   async resetEmail(useremail) {
     await this.emailInput.fill(useremail);
     await this.continueBtn.click();
+=======
+
+  async restemail(useremail) {
+    await this.resetInput.fill(useremail);
+    await this.submitbtn.click();
+  }
+  
+  async getsuccessMessage() {
+    return await this.successMeessege.toHaveText('Successful Password Reset');
+>>>>>>> Stashed changes
   }
 
   async verifySuccess() {
