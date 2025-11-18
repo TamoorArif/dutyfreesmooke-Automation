@@ -9,9 +9,9 @@ class SignupPage {
     this.password = page.locator('#passwords');
     this.confirmPassword = page.locator('#confirm_passwords');
     this.signupBtn = page.locator('#signupbutton');
-    // this.emailVerified = page.locator('.o_portal_address .text-break ');  // Adjust selector if needed
-    //   this.errorMessage = page.locator('.error-message'); // For negative tests
-    //   this.successToast = page.locator('.toast-success'); // Optional success message
+    this.emailVerified = page.locator('main >> text=/@/');
+    //   this.errorMessage = page.locator('.error-message'); 
+    //   this.successToast = page.locator('.toast-success'); 
     this.errorMessage = page.locator("#errors")
   }
 
@@ -30,14 +30,14 @@ class SignupPage {
     await this.confirmPassword.fill(confirmPassword);
     await this.signupBtn.click();
   }
-  // // async getEmailVerified() {
-  //   // Wait until the email element is visible
-  //   await this.emailVerified.waitFor({ state: 'visible', timeout: 15000 });
+  async getEmailVerified() {
+    // Wait until the email element is visible
+    await this.emailVerified.waitFor({ state: 'visible', timeout: 15000 });
 
-  //   // Return the first matched email text
-  //   const emails = await this.emailVerified.allTextContents();
-  //   return emails.length > 0 ? emails[0].trim() : null;
-  // }
+    // Return the first matched email text
+    const emails = await this.emailVerified.allTextContents();
+    return emails.length > 0 ? emails[0].trim() : null;
+  }
 
   //   Get error message text (negative assertion)
   async getErrorMessage() {
@@ -50,4 +50,4 @@ class SignupPage {
   //     await this.successToast.waitFor({ state: 'visible', timeout: 10000 });
   //     return await this.successToast.textContent();
 };
-module.exports = {SignupPage}
+module.exports = SignupPage
