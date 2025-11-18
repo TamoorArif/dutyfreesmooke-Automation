@@ -10,5 +10,9 @@ function generateRandomEmail() {
 
   return `user_${randomString}@yopmail.com`;
 }
+function generateUniqueStoreName(baseName = "DutyFreeStore") {
+  const timestamp = Date.now(); // current time in milliseconds
+  return `${baseName}_${timestamp}`;
+}
 
-module.exports = { generateRandomEmail };
+module.exports = { generateRandomEmail,generateUniqueStoreName };

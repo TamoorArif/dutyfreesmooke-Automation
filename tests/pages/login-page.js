@@ -7,7 +7,7 @@ class LoginPage {
     this.useremail = page.locator('#login');
     this.userpassword = page.locator('#password');
     this.submitbtn = page.locator('#loginsubmitbutton');
-    //   this.emailverified = page.locator('.o_portal_address .text-break');
+    this.emailverified = page.locator('.gap-2 .text-break');
     this.errorMessage = page.locator('#errormsg');
   }
 
@@ -23,13 +23,13 @@ class LoginPage {
     await this.useremail.fill(useremail);
     await this.userpassword.fill(userpassword);
     await this.submitbtn.click();
-    //   await expect(this.emailverified).toHaveText('Test@yopmail.com');
-    //   await expect(this.errorMessage).toHaveText('Wrong login/password');
+    await expect(this.emailverified).toHaveText('Test@yopmail.com');
+    await expect(this.errorMessage).toHaveText('Wrong login/password');
   }
 
-  // async getEmailVerified() {
-  //   return await this.emailverified.textContent();
-  // }
+  async getEmailVerified() {
+    return await this.emailverified.textContent();
+  }
 
   async getErrorMessage() {
     return await this.errorMessage.textContent();

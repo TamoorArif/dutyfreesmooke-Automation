@@ -22,10 +22,7 @@ class WholesalerSignupPage {
   async goto() {
     await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
     await this.page.waitForSelector('#mc_modal');
-    const agemodel = await this.page.locator("#mc_modal")
-    if (agemodel) {
       await this.ageActionbtn.click();
-    }
     // await this.ageActionbtn.click();
     await this.profileclick.click();
     await this.wholeselleruserhyperlink.click();
@@ -54,31 +51,12 @@ class WholesalerSignupPage {
     await this.TypeofBusiness.selectOption({ label: 'Distributor' });
 
     // Interest in - Custom Multi-Select (Select2)
-    const interestInput = this.page.locator('#s2id_interest_types');
+    await this.page.locator('#s2id_interest_types').click();
+    await this.page.locator('.select2-results li:nth-child(1)').click();
 
-    // Wait for the visible select2 box
-    // await interestInput.waitFor({ state: 'visible' });
-    await interestInput.selectOption(['1', '2']);
+    await this.page.locator('#s2id_interest_types').click();
+    await this.page.locator('.select2-results li:nth-child(2)').click();
 
-    // // Now target the actual text field that appears after clicking
-    // const searchField = this.page.locator('.select2-search__field');
-
-    // // Type and select "Vapes"
-    // await searchField.fill('Vapes');
-    // await this.page.keyboard.press('Enter');
-
-    // // Click again to activate input for next value
-    // await interestInput.click();
-
-    // // Type and select "Cigarettes"
-    // await searchField.fill('Cigarettes');
-    // await this.page.keyboard.press('Enter');
-
-    // // Optional — verify both tags are selected (if visible)
-    // const selectedTags = this.page.locator('.select2-selection__choice');
-    // await expect(selectedTags).toContainText(['Vapes', 'Cigarettes']);
-
-    // // Submit
     await this.submitBtn.click();
   }
 }
