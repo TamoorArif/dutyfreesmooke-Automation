@@ -1,4 +1,4 @@
-// pages/wholeseller-singup.js
+// pages/wholeseller-signup.js
 class WholesalerSignupPage {
   constructor(page) {
     this.page = page;
@@ -22,8 +22,9 @@ class WholesalerSignupPage {
   async goto() {
     await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
     await this.page.waitForSelector('#mc_modal');
-      await this.ageActionbtn.click();
-    // await this.ageActionbtn.click();
+    await this.ageActionbtn.click();
+
+    // Ye teeno lines goto() ke andar daal di
     await this.profileclick.click();
     await this.wholeselleruserhyperlink.click();
     await this.firstname.waitFor({ state: 'visible' });
@@ -47,18 +48,20 @@ class WholesalerSignupPage {
     await this.PostalCode.fill(zip);
     await this.StoreName.fill(storename);
 
-    // Type of Business - Use exact visible option
+    // Type of Business
     await this.TypeofBusiness.selectOption({ label: 'Distributor' });
 
-    // Interest in - Custom Multi-Select (Select2)
-    await this.page.locator('#s2id_interest_types').click();
-    await this.page.locator('.select2-results li:nth-child(1)').click();
-
-    await this.page.locator('#s2id_interest_types').click();
-    await this.page.locator('.select2-results li:nth-child(2)').click();
-
+    // Interest in - Select2 Multi-Select
+    // Interest in * - 100% Working (screenshot ke exact match se)
+    await this.page.locator('#s2id_interest_types').click({ force: true });
+    await this.page.locator('.select2-input').type('Vapes');
+    await this.page.keyboard.press('Enter');
+    await this.page.locator('.select2-input').type('Cigarettes');
+    await this.page.keyboard.press('Enter');
+    await this.page.keyboard.press('Escape');
+    // Submit
     await this.submitBtn.click();
   }
 }
 
-module.exports = WholesalerSignupPage;
+module.exports = { WholesalerSignupPage };

@@ -50,4 +50,4 @@ class SignupPage {
   //     await this.successToast.waitFor({ state: 'visible', timeout: 10000 });
   //     return await this.successToast.textContent();
 };
-module.exports = SignupPage
+module.exports = { SignupPage }
