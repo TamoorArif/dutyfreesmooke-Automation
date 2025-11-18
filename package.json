@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "test": "playwright test",
-    "test:headed": "playwright test --headed",
+    "test:headed": "tests/spec/newArrival.spec.js --headed --project=chromium",
     "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
