@@ -1,22 +1,22 @@
-// tests/spec/newArrival.spec.js  ←← FINAL SPEC FILE (COPY-PASTE KAR DO)
+// tests/spec/newArrival.spec.js
 
 const { test, expect } = require('@playwright/test');
 const { NewArrivalsPage } = require('../pages/newarrival-page');
 
 test.describe('New Arrivals Tests', () => {
 
-    test('Verify New Arrivals link & product details', async ({ page }) => {
-        const newArrivals = new NewArrivalsPage(page);
+  test('Verify New Arrivals link opens and products are visible', async ({ page }) => {
+    const newArrivals = new NewArrivalsPage(page);
 
-        await newArrivals.goto();                  // Home → Age gate → New Arrivals page
-        await newArrivals.verifyNewArrivalProducts(); // Grid + images + titles + prices check
-    });
+    await newArrivals.goto();            // Navigate + handle modal + load products
+    await newArrivals.verifyNewArrivalProducts(); // Assert product count > 0
+  });
 
-    test('Verify redirection to product detail page', async ({ page }) => {
-        const newArrivals = new NewArrivalsPage(page);
+  test('Verify first product opens with correct details', async ({ page }) => {
+    const newArrivals = new NewArrivalsPage(page);
 
-        await newArrivals.goto();                  // Same navigation
-        await newArrivals.openFirstProduct();      // First product click + title match on PDP
-    });
+    await newArrivals.goto();
+    await newArrivals.openFirstProduct(); // Match title after click
+  });
 
 });
