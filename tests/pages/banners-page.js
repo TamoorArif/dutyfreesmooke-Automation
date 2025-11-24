@@ -13,17 +13,17 @@ class HomeBannerPage {
   }
 
   async goto() {
-  await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
 
-  // If age modal appears → handle it
-  const modal = this.page.locator('#mc_modal');
-  if (await modal.isVisible({ timeout: 3000 }).catch(() => false)) {
-    await this.ageActionbtn.click();
+    // If age modal appears → handle it
+    const modal = this.page.locator('#mc_modal');
+    if (await modal.isVisible({ timeout: 20000 }).catch(() => false)) {
+      await this.ageActionbtn.click();
+    }
+
+    // Continue only after banner is ready
+    await this.carousel.waitFor({ state: 'visible', timeout: 10000 });
   }
-
-  // Continue only after banner is ready
-  await this.carousel.waitFor({ state: 'visible', timeout: 10000 });
-}
 
 
   async getSlideCount() {
@@ -43,12 +43,12 @@ class HomeBannerPage {
   }
 
   async verifySlideActive(index) {
-  const slide = this.slides.nth(index);
+    const slide = this.slides.nth(index);
 
-  await this.page.waitForFunction(el => el.classList.contains('active'), await slide.elementHandle());
+    await this.page.waitForFunction(el => el.classList.contains('active'), await slide.elementHandle());
 
-  await expect(slide).toHaveClass(/active/);
-}
+    await expect(slide).toHaveClass(/active/);
+  }
 
 
   async clickBanner(index) {

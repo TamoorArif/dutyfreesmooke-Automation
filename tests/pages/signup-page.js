@@ -9,7 +9,7 @@ class SignupPage {
     this.password = page.locator('#passwords');
     this.confirmPassword = page.locator('#confirm_passwords');
     this.signupBtn = page.locator('#signupbutton');
-    this.emailVerified = page.locator('main >> text=/@/');
+    this.emailVerified = page.locator('#unique_verify_email');
     //   this.errorMessage = page.locator('.error-message'); 
     //   this.successToast = page.locator('.toast-success'); 
     this.errorMessage = page.locator("#errors")

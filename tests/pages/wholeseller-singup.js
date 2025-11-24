@@ -24,7 +24,7 @@ class WholesalerSignupPage {
     await this.page.waitForSelector('#mc_modal');
     await this.ageActionbtn.click();
 
-    // Ye teeno lines goto() ke andar daal di
+
     await this.profileclick.click();
     await this.wholeselleruserhyperlink.click();
     await this.firstname.waitFor({ state: 'visible' });
@@ -52,7 +52,6 @@ class WholesalerSignupPage {
     await this.TypeofBusiness.selectOption({ label: 'Distributor' });
 
     // Interest in - Select2 Multi-Select
-    // Interest in * - 100% Working (screenshot ke exact match se)
     await this.page.locator('#s2id_interest_types').click({ force: true });
     await this.page.locator('.select2-input').type('Vapes');
     await this.page.keyboard.press('Enter');

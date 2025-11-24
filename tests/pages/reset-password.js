@@ -7,7 +7,7 @@ class Resetpassword {
     this.page = page;
 
     this.ageActionbtn = page.locator('.age-actions .btn.btn-over');
-    this.loginBtn = page.locator('.df-user-login-web');
+    this.loginBtn = page.locator('#auto_id_103');
     this.forgotLink = page.locator('#forgotpassword');
 
     // Created lazily after modal appears
@@ -27,7 +27,7 @@ class Resetpassword {
 
     // Wait for Forgot Password modal
     const modal = this.page.locator('.modal-dialog');
-await modal.first().waitFor({ state: 'visible', timeout: 15000 });
+    await modal.first().waitFor({ state: 'visible', timeout: 15000 });
 
 
     // Shadow piercing + fallback
@@ -47,7 +47,8 @@ await modal.first().waitFor({ state: 'visible', timeout: 15000 });
   }
 
   async verifySuccess() {
-    await expect(this.successMsg).toBeVisible({ timeout: 10000 });
+    await this.page.waitForURL('http://139.59.24.22:8069/', { timeout: 10000 });
+    await expect(this.page).toHaveURL('http://139.59.24.22:8069/');
   }
 }
 
