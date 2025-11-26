@@ -3,7 +3,7 @@ class LoginPage {
   constructor(page) {
     this.page = page;
     this.ageActionbtn = page.locator('.age-actions .btn.btn-over');
-    this.loginbtn = page.locator('.df-user-login-web');
+    this.loginbtn = page.locator('#userloginpopup');
     this.useremail = page.locator('#login');
     this.userpassword = page.locator('#password');
     this.submitbtn = page.locator('#loginsubmitbutton');

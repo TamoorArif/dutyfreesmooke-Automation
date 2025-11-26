@@ -13,7 +13,7 @@ async function handleAgeModal(page) {
         // Wait for modal to disappear (stable UI)
         await modal.waitFor({ state: 'hidden', timeout: 5000 });
     } catch (e) {
-        // Modal never appeared → ignore
+        console.error(e)
     }
 }
 

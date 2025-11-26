@@ -8,6 +8,8 @@ test.describe('Homepage Banner Tests', () => {
 
     // Open homepage + age verification
     await bannerPage.goto();
+    await bannerPage.handleAgeModal();
+    await bannerPage.bannerReady();
 
     // Validate total slides > 0
     const totalSlides = await bannerPage.getSlideCount();
