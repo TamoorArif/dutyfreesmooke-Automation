@@ -12,14 +12,20 @@ class HomeBannerPage {
     this.prevArrow = page.locator('[data-name="Main Banner Slider"] .carousel-control-prev');
   }
 
-  async goto() {
+   async goto() {
     await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
 
-    // If age modal appears → handle it
+    // Handle age modal - wait for it, click, then wait for it to disappear
     const modal = this.page.locator('#mc_modal');
-    if (await modal.isVisible({ timeout: 20000 }).catch(() => false)) {
-      await this.ageActionbtn.click();
+    try {
+      await modal.waitFor({ state: 'visible', timeout: 5000 });
+      await this.ageConfirmButton.click();
+      // Wait for modal to be hidden before proceeding
+      await modal.waitFor({ state: 'hidden', timeout: 5000 });
+    } catch (e) {
+      // Modal not present or already dismissed, continue
     }
+  
 
     // Continue only after banner is ready
     await this.carousel.waitFor({ state: 'visible', timeout: 10000 });

@@ -6,6 +6,7 @@ class SearchPage {
     this.page = page;
 
     // LOCATORS
+    this.ageConfirmButton = page.locator('.age-actions .btn.btn-over');
     this.searchInput = page.locator('#auto_id_98');
     this.dropdown = page.locator('.o_searchbar_form .o_dropdown_menu');
     this.resultItems = page.locator('.o_searchbar_form .o_dropdown_menu .dropdown-item');
