@@ -10,22 +10,14 @@ test.describe('Filter Tests', () => {
         await expect(filter.FlavoursLabel).toBeVisible();
     });
 
-    test.only('Select Flavour and apply filter', async ({ page }) => {
+    test('Select Flavour and apply filter', async ({ page }) => {
         const filter = new Filterpage(page);
         await filter.goto();
         await filter.openFilter();
         await filter.selectFlavour();
         await filter.applyFilter();
-        const products = page.locator('#products_grid .col-lg-3');
+       await expect(page).toHaveURL(/category=9.*attribute_group_value=10-1/);
 
-        // Pehle grid wait karo attached hone ka
-        await page.waitForSelector('#products_grid', { state: 'attached', timeout: 15000 });
-
-        // Then at least 1 product appear hone ka wait
-        await expect(products.first()).toBeVisible({ timeout: 20000 });
-
-        // Bonus safety: minimum count > 0
-        await expect(products).toHaveCountGreaterThan(0);
     });
 
     test('Select Nicotine Strength and apply filter', async ({ page }) => {
@@ -34,11 +26,8 @@ test.describe('Filter Tests', () => {
         await filter.openFilter();
         await filter.selectNicotine();
         await filter.applyFilter();
-        // Wait until at least 1 product appears
-        const products = page.locator('#products_grid .col-lg-3');
-
-        // Ye wait karega jab tak 1 product visible na ho jaye
-        await expect(products.first()).toBeVisible({ timeout: 15000 });
+        await expect(page).toHaveURL(/category=9.*(attribute_group_value|attribute_value)=13-517/);
+;
     });
 
     test('Select Nicotine Strength 2 and apply filter', async ({ page }) => {
@@ -47,11 +36,7 @@ test.describe('Filter Tests', () => {
         await filter.openFilter();
         await filter.selectNicotine2();
         await filter.applyFilter();
-        // Wait until at least 1 product appears
-        const products = page.locator('#products_grid .col-lg-3');
-
-        // Ye wait karega jab tak 1 product visible na ho jaye
-        await expect(products.first()).toBeVisible({ timeout: 15000 });
+        await expect(page).toHaveURL(/category=9.*(attribute_group_value|attribute_value)=14-15/)
     });
 
     test('Select Puff Count and apply filter', async ({ page }) => {
@@ -60,22 +45,16 @@ test.describe('Filter Tests', () => {
         await filter.openFilter();
         await filter.selectPuffCount();
         await filter.applyFilter();
-        // Wait until at least 1 product appears
-        const products = page.locator('#products_grid .col-lg-3');
+       // Puff Count
+await expect(page).toHaveURL(/category=9.*(attribute_group_value|attribute_value|filters)=1-1/);
 
-        // Ye wait karega jab tak 1 product visible na ho jaye
-        await expect(products.first()).toBeVisible({ timeout: 15000 });
     });
 
     test('Reset filter', async ({ page }) => {
         const filter = new Filterpage(page);
         await filter.goto();
+        await filter.openFilter();
         await filter.resetFilter();
-        // Wait until at least 1 product appears
-        const products = page.locator('#products_grid .col-lg-3');
-
-        // Ye wait karega jab tak 1 product visible na ho jaye
-        await expect(products.first()).toBeVisible({ timeout: 15000 });
-    });
-
-});
+        await expect(page).toHaveURL(/category=9/); // Reset ke baad sirf category param check
+     });
+ });

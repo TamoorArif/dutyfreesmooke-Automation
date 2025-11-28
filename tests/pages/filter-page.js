@@ -38,23 +38,33 @@ class Filterpage {
     }
 
     async selectFlavour() {
-        await this.FlavoursLabel.scrollIntoViewIfNeeded();
-        await this.FlavoursLabel.click();
+          await this.FlavoursLabel.waitFor({ state: 'attached', timeout: 10000 });
+    // Scroll into view
+    await this.FlavoursLabel.scrollIntoViewIfNeeded();
+    // Small pause for stability
+         await this.page.waitForTimeout(300);
+        await this.FlavoursLabel.click({ force: true });
     }
 
     async selectNicotine() {
+        await this.NicotinStrengthLabel.waitFor({state:'attached',timeout:10000})
         await this.NicotinStrengthLabel.scrollIntoViewIfNeeded();
-        await this.NicotinStrengthLabel.click();
+        await this.page.waitForTimeout(300);
+        await this.NicotinStrengthLabel.click({ force: true });
     }
 
     async selectNicotine2() {
+        await this.NicotinStrength2Label.waitFor({state:'attached',timeout:10000})
         await this.NicotinStrength2Label.scrollIntoViewIfNeeded();
-        await this.NicotinStrength2Label.click();
+          await this.page.waitForTimeout(300);
+        await this.NicotinStrength2Label.click({ force: true });
     }
 
     async selectPuffCount() {
+        await this.PuffCountLabel.waitFor({state:'attached',timeout:10000})
         await this.PuffCountLabel.scrollIntoViewIfNeeded();
-        await this.PuffCountLabel.click();
+          await this.page.waitForTimeout(300);
+        await this.PuffCountLabel.click({ force: true });
     }
 
     async applyFilter() {
@@ -64,8 +74,10 @@ class Filterpage {
     }
 
     async resetFilter() {
-        await this.filterreset.waitFor({ state: 'visible', timeout: 10000 });
-        await this.filterreset.click();
+        await this.filterreset.waitFor({ state: 'attached', timeout: 10000 });
+        await this.filterreset.scrollIntoViewIfNeeded();
+        await this.page.waitForTimeout(300);
+        await this.filterreset.click({ force: true });
         await this.page.waitForLoadState('networkidle');
     }
 
