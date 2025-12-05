@@ -2,7 +2,7 @@
 class WholesalerSignupPage {
   constructor(page) {
     this.page = page;
-    this.ageActionbtn = page.locator('.age-actions .btn.btn-over');
+    this.ageConfirmButton = page.locator('.age-actions .btn.btn-over');
     this.profileclick = page.locator('#userloginpopup');
     this.wholeselleruserhyperlink = page.locator('#wholesignuptoday');
 
@@ -20,9 +20,19 @@ class WholesalerSignupPage {
   }
 
   async goto() {
-    await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
-    await this.page.waitForSelector('#mc_modal');
-    await this.ageActionbtn.click();
+    await this.page.goto('https://stage-dutyfree.odoo.com/', { waitUntil: 'domcontentloaded' });
+
+    // Handle age modal - wait for it, click, then wait for it to disappear
+    const modal = this.page.locator('#mc_modal');
+    try {
+      await modal.waitFor({ state: 'visible', timeout: 5000 });
+      await this.ageConfirmButton.click();
+      // Wait for modal to be hidden before proceeding
+      await modal.waitFor({ state: 'hidden', timeout: 5000 });
+    } catch (e) {
+      // Modal not present or already dismissed, continue
+    }
+  
 
 
     await this.profileclick.click();

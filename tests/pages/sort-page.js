@@ -16,7 +16,7 @@ class SortPage {
     }
 
     async goto() {
-        await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
+        await this.page.goto('https://stage-dutyfree.odoo.com//', { waitUntil: 'domcontentloaded' });
 
         // Handle age modal
         const modal = this.page.locator('#mc_modal');

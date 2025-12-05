@@ -14,7 +14,7 @@ class LoginPage {
   }
 
   async goto() {
-    await this.page.goto('http://139.59.24.22:8069/', { waitUntil: 'domcontentloaded' });
+    await this.page.goto('https://stage-dutyfree.odoo.com/', { waitUntil: 'domcontentloaded' });
     await this.page.waitForSelector('#mc_modal', { state: 'visible', timeout: 20000 });
     await this.ageActionbtn.click();
     await this.loginbtn.click();
