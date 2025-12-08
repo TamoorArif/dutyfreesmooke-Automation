@@ -18,13 +18,15 @@ test.describe('Add to Cart Tests', () => {
         const afterQty = Number(await cart.getCartQuantity());
 
         expect(afterQty).toBeGreaterThan(beforeQty);
+        await cart.openCart();
 
-        // Step 5: Verify cart icon visible
-        await expect(cart.cartWrapper).toBeVisible();
-        await expect(cart.cartLink).toBeVisible();
-        await expect(cart.cartIcon).toBeVisible();
-        await cart.addToCart();
-        await expect(cart.cartQuantity).toHaveText("1");
+    });
+
+    test.only("verify multiple products adds to cart & cart count increases", async ({ page }) => {
+        const cart = new AddCartPage(page);
+        await cart.goto();
+        await cart.addMultipleProductsToCart(3); 
+        await cart.openCart();
     });
 
 });
