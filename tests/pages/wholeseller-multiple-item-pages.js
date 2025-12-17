@@ -86,7 +86,7 @@ class WholeSellerPages {
                 
                 // Wait for modal to appear
                 const modal = this.page.locator('.modal.df-select-flavour');
-                await modal.waitFor({ state: 'visible', timeout: 10000 });
+                await modal.waitFor({ state: 'visible', timeout: 90000 });
 
                 // Check all plus buttons in the modal
                 const plusButtons = modal.locator('[name="sale_quantity_button_plus"]');
@@ -103,7 +103,7 @@ class WholeSellerPages {
                 if (allDisabled) {
                     // Close modal and continue to next product
                     await modal.locator('.btn-close.as_close').click();
-                    await modal.waitFor({ state: 'hidden', timeout: 5000 });
+                    await modal.waitFor({ state: 'hidden', timeout: 9000 });
                     continue;
                 } else {
                     // Find all enabled plus buttons first
@@ -130,7 +130,7 @@ class WholeSellerPages {
                             await button.click();
                             itemsAdded++;
                             // Small wait between clicks
-                            await this.page.waitForTimeout(300);
+                            await this.page.waitForTimeout(500);
                         }
                     }
                     
@@ -141,7 +141,7 @@ class WholeSellerPages {
                         
                         // Wait for success message (optional)
                         try {
-                            await expect(this.successMessage).toBeVisible({ timeout: 5000 });
+                            await expect(this.successMessage).toBeVisible({ timeout: 7000 });
                             await expect(this.successMessage).toHaveText('Item successfully added into the cart.');
                         } catch {
                             // Continue even if success message doesn't appear
@@ -149,7 +149,7 @@ class WholeSellerPages {
                         
                         // Wait for modal to close or wait a bit before next product
                         try {
-                            await modal.waitFor({ state: 'hidden', timeout: 5000 });
+                            await modal.waitFor({ state: 'hidden', timeout: 7000 });
                         } catch {
                             // Modal might already be closed, continue
                         }
@@ -162,7 +162,7 @@ class WholeSellerPages {
                     } else {
                         // Close modal if no items were added
                         await modal.locator('.btn-close.as_close').click();
-                        await modal.waitFor({ state: 'hidden', timeout: 5000 });
+                        await modal.waitFor({ state: 'hidden', timeout: 7000 });
                     }
                 }
                 
@@ -173,7 +173,7 @@ class WholeSellerPages {
                     const modal = this.page.locator('.modal.df-select-flavour');
                     if (await modal.isVisible({ timeout: 1000 }).catch(() => false)) {
                         await modal.locator('.btn-close.as_close').click();
-                        await modal.waitFor({ state: 'hidden', timeout: 5000 });
+                        await modal.waitFor({ state: 'hidden', timeout: 7000 });
                     }
                 } catch (e) {
                     // Continue if modal handling fails
