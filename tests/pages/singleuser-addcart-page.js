@@ -5,7 +5,7 @@ class AddCartPage {
         this.page = page;
         this.ageActionbtn = page.locator('.age-actions .btn.btn-over');
         this.profilebtn = page.locator('#userloginpopup');
-        this.loginfiled = page.locator('#login');   
+        this.loginfiled = page.locator('#login');
         this.passwordfiled = page.locator('#password');
         this.loginsubmitbtn = page.locator('#loginsubmitbutton');
         this.appbtn = page.locator('#o_backend_user_dropdown_link');
@@ -18,9 +18,9 @@ class AddCartPage {
 
         // New Arrivals link
         this.newArrivalsLink = page.locator('#auto_id_20');
-        this.gridItem=page.locator('#o_wsale_products_grid .oe_product');
-        this.firstProduct=page.locator('#o_wsale_products_grid .oe_product:first-child #add_to_cart')
-        this.cartButton=page.locator('.hm-icon.hm-icon-cart.as_mini_cart');
+        this.gridItem = page.locator('#o_wsale_products_grid .oe_product');
+        this.firstProduct = page.locator('#o_wsale_products_grid .oe_product:first-child #add_to_cart')
+        this.cartButton = page.locator('.hm-icon.hm-icon-cart.as_mini_cart');
         // Cart quantity
         this.cartQuantity = page.locator('#auto_id_121');
         // Cart wrapper
@@ -44,7 +44,7 @@ class AddCartPage {
         const modal = this.page.locator('#mc_modal');
         try {
             await modal.waitFor({ state: 'visible', timeout: 5000 });
-            await this.ageActionbtn .click();
+            await this.ageActionbtn.click();
             // Wait for modal to be hidden before proceeding
             await modal.waitFor({ state: 'hidden', timeout: 5000 });
         } catch (e) {
@@ -68,20 +68,20 @@ class AddCartPage {
         // Wait for page to load
         await this.page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => { });
     }
-    
+
 
 
     async addFirstItemToCart() {
         await expect(this.gridItem.first()).toBeVisible({ timeout: 5000 });
         await this.firstProduct.click();
-    
-    
+
+
     }
 
     async getCartQuantity() {
         await expect(this.cartQuantity).toBeVisible({ timeout: 5000 });
         return await this.cartQuantity.textContent();
-        
+
     }
 
     async openCart() {
@@ -90,37 +90,44 @@ class AddCartPage {
         await this.checkSubmitBtn.click();
         await expect(this.page).toHaveURL(/\/shop\/payment$/, {
             timeout: 20000
-          });
-          
-          await expect(this.demoRadioBtn).toBeVisible({ timeout: 15000 });
-          await this.demoRadioBtn.scrollIntoViewIfNeeded();
-          await this.demoRadioBtn.click({ force: true });
-    
-          await this.paymentSubmitBtn.click();
+        });
+
+        await expect(this.demoRadioBtn).toBeVisible({ timeout: 15000 });
+        await this.demoRadioBtn.scrollIntoViewIfNeeded();
+        await this.demoRadioBtn.click({ force: true });
+
+        await this.paymentSubmitBtn.click();
+        await expect(this.page).toHaveURL(/\/shop\/payment$/, {
+            timeout: 20000
+        });
+        await expect(this.page).toHaveURL(/\/shop\/(confirmation|payment\/success)$/, {
+            timeout: 20000
+        });
+
+
     }
-    
     async addMultipleProductsToCart(count = 3) {
         // Wait for first product to be visible
         await expect(this.gridItem.first()).toBeVisible({ timeout: 10000 });
-    
+
         const totalProducts = await this.gridItem.count();
-    
+
         for (let i = 0; i < count && i < totalProducts; i++) {
             const productCard = this.gridItem.nth(i);
             const addToCartBtn = productCard.locator('#add_to_cart');
-    
+
             // Scroll to product
             await productCard.scrollIntoViewIfNeeded();
-    
+
             // Wait and click Add to Cart
             await expect(addToCartBtn).toBeVisible({ timeout: 5000 });
             await addToCartBtn.click();
-    
+
             // Small wait for cart update
             await this.page.waitForTimeout(800);
         }
     }
-    
-    
+
+
 }
 module.exports = { AddCartPage };

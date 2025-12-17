@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const { AddCartPage } = require('../pages/addcart-page');
+const { AddCartPage } = require('../pages/singleuser-addcart-page');
 
 test.describe('Add to Cart Tests', () => {
 
@@ -22,7 +22,7 @@ test.describe('Add to Cart Tests', () => {
 
     });
 
-    test.only("verify multiple products adds to cart & cart count increases", async ({ page }) => {
+    test("verify multiple products adds to cart & cart count increases", async ({ page }) => {
         const cart = new AddCartPage(page);
         await cart.goto();
         await cart.addMultipleProductsToCart(3); 

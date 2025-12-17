@@ -19,7 +19,7 @@ class HomeBannerPage {
     const modal = this.page.locator('#mc_modal');
     try {
       await modal.waitFor({ state: 'visible', timeout: 5000 });
-      await this.ageConfirmButton.click();
+      await this.ageActionbtn.click();
       // Wait for modal to be hidden before proceeding
       await modal.waitFor({ state: 'hidden', timeout: 5000 });
     } catch (e) {
