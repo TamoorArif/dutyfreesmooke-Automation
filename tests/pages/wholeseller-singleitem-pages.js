@@ -58,7 +58,7 @@ class WholeSellerPages {
         // Login
         await this.profilebtn.click();
         await this.loginfiled.fill('common@dutyfree.com');
-        await this.passwordfiled.fill('df13579');
+        await this.passwordfiled.fill('1589');
         await this.loginsubmitbtn.click();
 
         await this.page.waitForLoadState('networkidle');
